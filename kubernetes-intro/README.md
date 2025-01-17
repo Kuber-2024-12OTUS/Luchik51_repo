@@ -12,13 +12,22 @@ minikube status
 minikube stop
 ```
 
-Публикация приложения:
+Публикация Pod:
 ```
 kubectl apply -f namespace.yaml
 kubectl apply -f pod.yaml
 ```
+Проверка работы Pod:
+```
+kubectl get pod -n homework
+```
+Диагностика
+```
+kubectl logs web-server -c init-config -n homework
+kubectl describe pod web-server -n homework
+```
 
 Проверка работы веб сервера:
 ```
-kubectl exec web-server -- curl http://localhost:8000
+kubectl exec web-server -n homework -- curl http://localhost:8000
 ```
