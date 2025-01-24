@@ -14,7 +14,9 @@ spec:
       labels:
         app: nginx
     spec:
-      nodeName: minikube
+      #nodeName: minikube
+      nodeSelector:
+        web-server: nginx
       initContainers:
         - name: init-config
           image: busybox

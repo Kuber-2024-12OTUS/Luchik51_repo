@@ -20,14 +20,17 @@ kubectl get pod -n homework
 Все поды должны быть запущены и готовы (Ready 1/1)
 
 Задача со звездочкой *
-Запуск deployment на определенных нодах.
+**Запуск deployment на определенных нодах.**
 Список доступных нодов можно получить так:
 ```
-kubectl get nodes
+kubectl get nodes -o wide --show-labels
 ```
 nodeName: minikube
-В рамках Minikube у нас только одна нода - minikube. Только на ней запуститься deployment. Если указать не правльное название. то будет ожидать появления нужной ноды.
-
+В рамках Minikube у нас только одна нода - minikube. Только на ней запуститься deployment. Если указать не правльное название или отсуствующию метку (label). то будет ожидать появления нужной ноды "0/1     Pending".
+Так можно установить метку "web-server=nginx" на нашу ноду
+```
+kubectl label nodes minikube web-server=nginx
+```
 
 **Диагностика**
 ```
