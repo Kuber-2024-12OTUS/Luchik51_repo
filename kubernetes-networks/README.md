@@ -24,6 +24,10 @@ minikube addons enable ingress
 kubectl get pods -n ingress-nginx
 ```
 
+Если с нуля:
+Проставить метку на ноду
+kubectl label nodes minikube web-server=nginx
+
 Добавить в c:\Windows\System32\drivers\etc\hosts
 ```
 127.0.0.1 homework.otus
@@ -33,3 +37,9 @@ kubectl get pods -n ingress-nginx
 ```
 minikube tunnel
 ```
+
+Диагностика:
+Проверить метки:
+kubectl get pods -n homework --show-labels
+kubectl exec nginx-deployment-fc47f888f-ltpn4 -c nginx -n homework -- curl http://10.104.80.214:8000
+kubectl get svc -n homework
