@@ -22,11 +22,14 @@ Service
 ```
 minikube addons enable ingress
 kubectl get pods -n ingress-nginx
+# Если не стартует.
+kubectl label nodes minikube minikube.k8s.io/primary=true
 ```
 
 Если с нуля:
 Проставить метку на ноду
 kubectl label nodes minikube web-server=nginx
+
 
 Добавить в c:\Windows\System32\drivers\etc\hosts
 ```
@@ -37,6 +40,15 @@ kubectl label nodes minikube web-server=nginx
 ```
 minikube tunnel
 ```
+
+kubectl delete -f .\deployment.yaml -n homework
+kubectl apply -f .\namespace.yaml -n homework
+kubectl apply -f .\deployment.yaml -n homework
+kubectl apply -f .\service.yaml -n homework
+kubectl apply -f .\ingress.yaml -n homework
+kubectl get svc -n homework
+kubectl get ingress --all-namespaces
+# в поле ADDRESS появился 172.19.221.196. Его прописываем в hosts файл.
 
 Диагностика:
 Проверить метки:
