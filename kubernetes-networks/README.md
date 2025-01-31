@@ -3,7 +3,7 @@
 ## Домашнее задание
 Научится создавать и конфигурировать Service и Ingress.  
 
-Документация:
+Документация:  
 [Про Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)  
 [Про сервисы](https://kubernetes.io/docs/concepts/services-networking/service/)  
 
@@ -19,10 +19,11 @@
 minikube addons enable ingress
 ```
 
-Если с нуля:
-Проставить метку на ноду
+Если с нуля:  
+Проставить метку на ноду  
+```
 kubectl label nodes minikube web-server=nginx
-
+```
 
 Добавить в c:\Windows\System32\drivers\etc\hosts
 ```
