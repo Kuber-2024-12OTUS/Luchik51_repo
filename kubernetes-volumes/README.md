@@ -1,16 +1,16 @@
 # 4. Сетевая подсистема и сущности Kubernetes (ДЗ-3)
 
 ## Домашнее задание
-Научится создавать и конфигурировать Service и Ingress.  
+1) Научится создавать в кластере объекты, описывающие  персистентные хранилища.  
+2) Научиться создавать объект ConfigMap и монтировать его как volume  
+3) Получить представление об объекте StorageClass и механизме provisioning для PV  
 
 Документация:  
-[Про Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)  
-[Про сервисы](https://kubernetes.io/docs/concepts/services-networking/service/)  
+[Volumes](https://kubernetes.io/docs/concepts/storage/volumes/)  
+[Persistent Volumes (PV и PVC)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)  
+[Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)  
+[ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)  
 
-**Цель:**
-1) Научиться создавать и конфигурировать объекты типа Service  
-2) Научится использовать объекты типа Service для взаимодействия между приложениями в кластере  
-3) Получить представление об объекте типа Ingress, научится создавать и конфигурировать объекты этого типа.  
 
 
 **Для запуска приложения надо:**  
@@ -41,6 +41,8 @@ kubectl apply -f .\namespace.yaml -n homework
 kubectl apply -f .\deployment.yaml -n homework
 kubectl apply -f .\service.yaml -n homework
 kubectl apply -f .\ingress.yaml -n homework
+kubectl apply -f .\cm.yaml -n homework
+kubectl apply -f .\pvc.yaml -n homework
 ```
 Добавить в Hosts домен:
 ```
@@ -48,10 +50,17 @@ kubectl get ingress --all-namespaces
 # в поле ADDRESS появился 172.19.221.196. Его прописываем в hosts файл.
 ```
 
+Проверяем:  
+http://homework.otus/homework/conf - предложит скачать файл, в котором будет содержимое из cm.yaml
+
 Для задачи со * (звездочкой):  
 ```
-kubectl delete -f .\ingress.yaml -n homework
-kubectl apply -f .\ingress-star.yaml -n homework
+# выводит конфигурацию стандартного StorageClass
+kubectl get sc standard -o yaml
+kubectl apply -f .\star-storageClass.yaml
+kubectl apply -f .\star-pvc.yaml -n homework
+kubectl delete -f .\star-deployment.yaml -n homework
+
 ```
 
 Скриншот, что получилось:  
