@@ -1,15 +1,14 @@
 # 4. Сетевая подсистема и сущности Kubernetes (ДЗ-3)
 
 ## Домашнее задание
-1) Научится создавать в кластере объекты, описывающие  персистентные хранилища.  
-2) Научиться создавать объект ConfigMap и монтировать его как volume  
-3) Получить представление об объекте StorageClass и механизме provisioning для PV  
+1) Получить предстваление об объекте ServiceAccaunt (SA) 
+2) Научится настраивать bindings для ServiceAccaunt с различными правами на уровне namespace и кластера.  
+3) Понять механизм работы секретов, которые создаются для SA
 
 Документация:  
-[Volumes](https://kubernetes.io/docs/concepts/storage/volumes/)  
-[Persistent Volumes (PV и PVC)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)  
-[Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)  
-[ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)  
+[Service Accounts](https://kubernetes.io/docs/concepts/security/service-accounts/)  
+[Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)  
+[Organizing Cluster Access Using kubeconfig Files](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)  
 
 
 
@@ -38,11 +37,11 @@ minikube tunnel
 Запускаемся:
 ```
 kubectl apply -f .\namespace.yaml -n homework
-kubectl apply -f .\pvc.yaml -n homework
-kubectl apply -f .\cm.yaml -n homework
 kubectl apply -f .\deployment.yaml -n homework
 kubectl apply -f .\service.yaml -n homework
 kubectl apply -f .\ingress.yaml -n homework
+kubectl apply -f .\cm.yaml -n homework
+kubectl apply -f .\pvc.yaml -n homework
 ```
 Добавить в Hosts домен:
 ```
@@ -59,7 +58,8 @@ http://homework.otus/homework/conf - предложит скачать файл,
 kubectl get sc standard -o yaml
 kubectl apply -f .\star-storageClass.yaml
 kubectl apply -f .\star-pvc.yaml -n homework
-kubectl apply -f .\star-deployment.yaml -n homework
+kubectl delete -f .\star-deployment.yaml -n homework
+
 ```
 
 Скриншот, что получилось:  
