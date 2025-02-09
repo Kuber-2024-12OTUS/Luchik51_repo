@@ -38,11 +38,11 @@ minikube tunnel
 Запускаемся:
 ```
 kubectl apply -f .\namespace.yaml -n homework
+kubectl apply -f .\pvc.yaml -n homework
+kubectl apply -f .\cm.yaml -n homework
 kubectl apply -f .\deployment.yaml -n homework
 kubectl apply -f .\service.yaml -n homework
 kubectl apply -f .\ingress.yaml -n homework
-kubectl apply -f .\cm.yaml -n homework
-kubectl apply -f .\pvc.yaml -n homework
 ```
 Добавить в Hosts домен:
 ```
@@ -59,8 +59,7 @@ http://homework.otus/homework/conf - предложит скачать файл,
 kubectl get sc standard -o yaml
 kubectl apply -f .\star-storageClass.yaml
 kubectl apply -f .\star-pvc.yaml -n homework
-kubectl delete -f .\star-deployment.yaml -n homework
-
+kubectl apply -f .\star-deployment.yaml -n homework
 ```
 
 Скриншот, что получилось:  
