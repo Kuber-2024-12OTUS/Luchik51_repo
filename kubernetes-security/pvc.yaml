@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nginx-pvc
+  name: nginx-pvc-star
   namespace: homework
 spec:
   accessModes:
@@ -10,4 +10,4 @@ spec:
   resources:
     requests:
       storage: 999Mi 
-  storageClassName: "standard"
+  storageClassName: "new-standard"
