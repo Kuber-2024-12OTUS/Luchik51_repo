@@ -1,0 +1,7 @@
+releases:
+  - name: otus
+    namespace: homework
+    chart: ./otus
+    #values:
+    #  - values.yaml
+    createNamespace: true
