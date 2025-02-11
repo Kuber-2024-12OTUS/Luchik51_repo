@@ -50,8 +50,14 @@ kubectl apply -f .\pvc.yaml -n homework
 ```
 helm delete otus -n homework
 helm install otus ./otus -n homework --create-namespace
+helm dependency update
+helm dependency list
 helm upgrade otus ./otus -n homework
 ```
+Скриншот, что получилось:  
+  
+helm redis  
+![helm redis  ](img/helm_redis.png)  
 
 Если это helmfile:
 ```
@@ -71,6 +77,7 @@ helmfile kafka
 
 Диагностика:  
 ```
+kubectl get all -n homework
 kubectl exec -it nginx-deployment-76b8898f4-7vhxw -c otus -n homework -- /bin/sh
 kubectl get pods/nginx-deployment-5f484b877f-r6qkd -n homework -o yaml
 kubectl describe pod/nginx-deployment-86988bf9d-6xq5n -n homework
