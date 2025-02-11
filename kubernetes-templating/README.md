@@ -52,8 +52,6 @@ helm delete otus -n homework
 helm install otus ./otus -n homework --create-namespace
 helm upgrade otus ./otus -n homework
 ```
-Скриншот, что получилось:  
-![homework.otus](img/homework.otus.png)  
 
 Если это helmfile:
 ```
