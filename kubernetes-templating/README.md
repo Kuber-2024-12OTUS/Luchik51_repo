@@ -19,7 +19,7 @@ kubectl delete ClusterRoleBinding metrics-access -n homework
 kubectl label nodes minikube web-server=nginx
 ```
 
-HelmFile
+**HelmFile**  
 От текущего пользователя (без административных прав) в Powershell 5.1+:
 ```
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -46,7 +46,7 @@ kubectl apply -f .\storageClass.yaml
 kubectl apply -f .\pvc.yaml -n homework
 ```
 
-Если это Helm:
+Если это **Helm**:
 ```
 helm delete otus -n homework
 helm install otus ./otus -n homework --create-namespace
