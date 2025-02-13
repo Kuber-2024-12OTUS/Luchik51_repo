@@ -1,0 +1,28 @@
+repositories:
+  - name: kafka-repo
+    url: https://helm-charts.itboon.top/kafka
+
+releases:
+  - name: otus
+    namespace: homework
+    chart: ./otus
+    #values:
+    #  - values.yaml
+    createNamespace: true
+
+  - name: kafka-prod
+    namespace: prod
+    createNamespace: true
+    chart: kafka-repo/kafka
+    version: 13.3.0
+    values:
+      - kafka-prod-values.yaml
+
+  - name: kafka-dev
+    namespace: dev
+    createNamespace: true
+    chart: kafka-repo/kafka
+    version: 18.0.1
+    values:
+      - kafka-dev-values.yaml
+  
