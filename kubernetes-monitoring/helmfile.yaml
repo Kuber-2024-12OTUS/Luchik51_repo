@@ -6,7 +6,8 @@ repositories:
     oci: true
 
 # Добавляем raw-манифесты
-#kustomizations:
+#kustomizeBinary: kustomize
+#kustomizations: ## не работает так.
 #  - path: .
 #    resources:
 #      - pvc.yaml
@@ -31,23 +32,23 @@ releases:
     #  - values.yaml
     createNamespace: true
 
-  #- name: kafka-prod
-  #  namespace: prod
-  #  createNamespace: true
-  #  chart: kafka-repo/kafka
-  #  version: 13.3.0
-  #  values:
-  #    - kafka-prod-values.yaml
+  - name: kafka-prod
+    namespace: prod
+    createNamespace: true
+    chart: kafka-repo/kafka
+    version: 13.3.0
+    values:
+      - kafka-prod-values.yaml
 
-  #- name: kafka-dev
-  #  namespace: dev
-  #  createNamespace: true
-  #  chart: kafka-repo/kafka
-  #  version: 18.0.1
-  #  values:
-  #    - kafka-dev-values.yaml
+  - name: kafka-dev
+    namespace: dev
+    createNamespace: true
+    chart: kafka-repo/kafka
+    version: 18.0.1
+    values:
+      - kafka-dev-values.yaml
   
-  - name: my-prometheus
+  - name: prom
     namespace: monitoring  # Укажите namespace, куда будет установлен Prometheus
     createNamespace: true
     chart: oci://registry-1.docker.io/bitnamicharts/kube-prometheus
