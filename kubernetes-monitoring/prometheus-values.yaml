@@ -25,14 +25,30 @@ prometheus:
     #    cpu: 200m
 #       memory: 1024Mi
 #operator: 
-resourcesPreset: "none" ## Мтапндартное resourcesPreset: "nano"
+blackbox-exporter:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+prometheus-operator:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+#resourcesPreset: "none" ## Мтапндартное resourcesPreset: "nano"
 resources:
   requests:
     cpu: 100m
-#       memory: 64Mi
+    memory: 64Mi
   limits:
     cpu: 200m
-#       memory: 1024Mi
+    memory: 256Mi
 serviceMonitor:
   enabled: true
   ## Что бы это работало, надо скачать helm и добавить файл (шаблон) - https://github.com/helm/charts/blob/9143206f0af35b7010c05b836a0d86aa68f002fa/stable/prometheus-operator/templates/prometheus/servicemonitors.yaml
