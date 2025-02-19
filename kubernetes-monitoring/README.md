@@ -20,6 +20,7 @@ minikube addons enable ingress
 kubectl apply -f storageClass.yaml
 helmfile sync
 kubectl apply -f pvc.yaml
+kubectl apply -f servicemonitor.yaml
 
 ```
 
@@ -32,6 +33,8 @@ kubectl get all -n monitoring
 kubectl get servicemonitor -n monitoring
 kubectl get clusterrole | Select-String "prometheus"
 kubectl describe clusterrole my-prometheus-kube-state-metrics-monitoring
+# смотрим логи метрики nginx.
+kubectl logs nginx-deployment-77dd58cdc7-5hps5 -c nginx-exporter -n homewor
 http://monitoring.otus/
 http://homework.otus/
 http://homework.otus/stats

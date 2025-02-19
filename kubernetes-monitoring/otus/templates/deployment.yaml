@@ -72,6 +72,16 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+        - name: nginx-exporter
+          image: 'nginx/nginx-prometheus-exporter:1.4.1'
+          args:
+          - '--nginx.scrape-uri=http://nginx-deployment:8000/stats'
+          resources:
+            limits:
+              memory: 64Mi
+              cpu: 300m
+          ports:
+          - containerPort: 9113
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

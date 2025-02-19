@@ -33,3 +33,22 @@ resources:
   limits:
     cpu: 200m
 #       memory: 1024Mi
+serviceMonitor:
+  enabled: true
+  ## Что бы это работало, надо скачать helm и добавить файл (шаблон) - https://github.com/helm/charts/blob/9143206f0af35b7010c05b836a0d86aa68f002fa/stable/prometheus-operator/templates/prometheus/servicemonitors.yaml
+  additionalServiceMonitors:
+    - name: nginx-servicemonitor
+      #namespace: monitoring
+      labels:
+        release: prometheus
+      selector:
+        matchLabels:
+          release: prometheus
+          app: web
+      endpoints:
+        - port: metrics
+          interval: 30s
+          path: /metrics
+      namespaceSelector:
+        matchNames:
+          - homework
