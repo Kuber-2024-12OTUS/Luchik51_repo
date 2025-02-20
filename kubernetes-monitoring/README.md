@@ -68,8 +68,18 @@ minikube start
 
 minikube config view
 #Альтернатива
-helm install prometheus oci://registry-1.docker.io/bitnamicharts/kube-prometheus  --set resources.requests.cpu=100m --set resources.limits.cpu=200m -n monitoring --create-namespace
+helm install prometheus2 oci://registry-1.docker.io/bitnamicharts/kube-prometheus  --set resources.requests.cpu=100m --set resources.limits.cpu=200m -n monitoring --create-namespace
+helm install prometheus2 oci://registry-1.docker.io/bitnamicharts/kube-prometheus -n monitoring --create-namespace
+helm uninstall prometheus2 -n monitoring
+minikube ssh "free -mh"
 
+total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       1.8Gi       221Mi       915Mi       1.7Gi       851Mi
+Swap:             0B          0B          0B
+
+helm list -n monitoring
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
+prometheus2     monitoring      1               2025-02-20 16:04:59.52695 +0300 +03     deployed        kube-prometheus-11.0.2  0.80.0
 
 kubectl exec -it pod/nginx-deployment-74fbf7df8f-5rns9 -c otus -n homework -- curl http://localhost:9113
 kubectl exec -it pod/nginx-deployment-74fbf7df8f-5rns9 -c otus -n homework -- curl http://localhost:9113/metrics
