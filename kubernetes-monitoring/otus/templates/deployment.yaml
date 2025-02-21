@@ -54,9 +54,9 @@ spec:
                 command: 
                 - "sh"
                 - "-c"
-                - echo 'server { listen 8000; location / { root /homework; index index.html; } location = /stats { stub_status; } }' > /etc/nginx/conf.d/default.conf
+                - echo 'server { listen 8000; location / { root /homework; index index.html; } location = /metrics { stub_status; } }' > /etc/nginx/conf.d/default.conf
                 - nginx -s reload
-                - 'curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://kubernetes.default.svc.cluster.local/metrics > /homework/metrics.html'
+                - 'curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://kubernetes.default.svc.cluster.local/metrics > /homework/metrics-k8s.html'
             preStop:
               exec:
                 command: ["/bin/sh","-c","rm /homework/index.html"]
@@ -75,7 +75,7 @@ spec:
         - name: nginx-exporter
           image: 'nginx/nginx-prometheus-exporter:1.4.1'
           args:
-          - '--nginx.scrape-uri=http://nginx-deployment:8000/stats'
+          - '--nginx.scrape-uri=http://nginx-deployment:8000/metrics'
           #resources:
           #  limits:
           #    memory: 64Mi

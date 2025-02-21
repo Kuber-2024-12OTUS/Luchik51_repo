@@ -8,7 +8,7 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: {{ .Values.service.port }}
       protocol: TCP
       name: http
   selector:
@@ -29,5 +29,7 @@ spec:
     targetPort: 9113
     protocol: TCP
   selector:
-    app: {{ .Chart.Name }}
+    {{- include "otus.selectorLabels" . | nindent 4 }}
+  #selector:
+  #  app: {{ .Chart.Name }}
   type: {{ .Values.service.type }} ## ClusterIP

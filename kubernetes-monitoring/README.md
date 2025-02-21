@@ -31,10 +31,12 @@ kubectl get ingress -A
 # прописываем address в hosts
 kubectl get all -n monitoring
 kubectl get servicemonitor -n monitoring
+kubectl describe servicemonitor nginx-servicemonitor -n monitoring
 kubectl get clusterrole | Select-String "prometheus"
 kubectl describe clusterrole my-prometheus-kube-state-metrics-monitoring
 # смотрим логи метрики nginx.
 kubectl logs nginx-deployment-77dd58cdc7-5hps5 -c nginx-exporter -n homework
+kubectl exec -it pod/nginx-deployment-74fbf7df8f-5rns9 -c otus -n homework -- curl http://localhost:9113/metrics
 http://monitoring.otus/
 http://homework.otus/
 http://homework.otus/stats
