@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       release: prometheus
-      app: otus
+      app: metrics
   endpoints:
     - port: metrics
       interval: 30s

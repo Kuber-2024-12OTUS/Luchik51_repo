@@ -21,7 +21,7 @@ metadata:
   #namespace: homework
   labels:
     release: prometheus
-    app: {{ .Chart.Name }}
+    app: metrics
 spec:
   ports:
   - port: 9113
