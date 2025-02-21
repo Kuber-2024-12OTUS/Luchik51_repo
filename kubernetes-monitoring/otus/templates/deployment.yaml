@@ -75,7 +75,7 @@ spec:
         - name: nginx-exporter
           image: 'nginx/nginx-prometheus-exporter:1.4.1'
           args:
-          - '--nginx.scrape-uri=http://nginx-deployment:8000/metrics'
+          - '--nginx.scrape-uri=http://metrics:9113/metrics'
           #resources:
           #  limits:
           #    memory: 64Mi
