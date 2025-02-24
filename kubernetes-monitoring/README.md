@@ -82,6 +82,7 @@ minikube ssh "free -mh"
 helm install prometheus2 oci://registry-1.docker.io/bitnamicharts/kube-prometheus  --set resources.requests.cpu=100m --set resources.limits.cpu=200m -n monitoring --create-namespace
 helm install prometheus2 oci://registry-1.docker.io/bitnamicharts/kube-prometheus -n monitoring --create-namespace
 helm uninstall prometheus2 -n monitoring
+helm list -n monitoring
 ```
 
 Как диагностировать сайт:
@@ -101,17 +102,15 @@ kubectl exec -it pod/nginx-deployment-74fbf7df8f-5rns9 -c otus -n homework -- cu
 kubectl describe service/nginx-deployment -n homework
 kubectl describe service/metrics -n homework
 ```
-Диагностика nginx-exporter для prometheus. В prpmetheus/target должен появится 
-serviceMonitor/monitoring/nginx-servicemonitor/0 (3/3 up)
+### Диагностика nginx-exporter для prometheus.  
+В prometheus/target должен появится:  
+serviceMonitor/monitoring/nginx-servicemonitor/0 (3/3 up)  
 Если (0/3 up) - тогда есть проблемы. Там описаны, куда стучится и надо перепроверить всё. У меня сейчас так: "Get "http://10.244.0.50:9113/metrics": context deadline exceeded"
 Я так понимаю путь: prometheus (target) -> servicemonitor (app: metrics path: /metrics) -> service/metrics (смоьтрим labels и Endpoints) -> pod (смотрим порт и работоспособность веб-сервера)
 
-helm list -n monitoring
-NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
-prometheus2     monitoring      1               2025-02-20 16:04:59.52695 +0300 +03     deployed        kube-prometheus-11.0.2  0.80.0
-
 
 # удаляем все через helmfile
+```
 helmfile destroy
 
 kubectl describe node minikube
