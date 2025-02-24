@@ -36,14 +36,19 @@ kubectl get clusterrole | Select-String "prometheus"
 kubectl describe clusterrole my-prometheus-kube-state-metrics-monitoring
 # смотрим логи метрики nginx.
 kubectl logs nginx-deployment-77dd58cdc7-5hps5 -c nginx-exporter -n homework
-kubectl exec -it pod/nginx-deployment-74fbf7df8f-5rns9 -c otus -n homework -- curl http://localhost:9113/metrics
+kubectl exec -it pod/nginx-deployment-74fbf7df8f-5rns9 -c otus -n homework -- curl http://metrics:9113/metrics
 http://monitoring.otus/
 http://homework.otus/
-http://homework.otus/stats
+http://homework.otus/metrics
+http://homework.otus/metrics-k8s.html
 
 ```
 
 Что получилось:  
+http://monitoring.otus/ - Targets nginx  
+![http://monitoring.otus/](img/prometheus-target.png)  
+http://monitoring.otus/ - Выбор меток и данных  
+![http://monitoring.otus/](img/prometheus-query.png)  
 http://monitoring.otus/ - табличное предстваление  
 ![http://monitoring.otus/](img/prometheus-table.png)  
 http://monitoring.otus/ - графики
