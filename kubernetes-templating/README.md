@@ -34,7 +34,7 @@ scoop install helmfile helm
 
 В Linux так:
 ```
-curl -Lo helmfile.tar.gz https://github.com/helmfile/helmfile/releases/download/v1.0.0-rc.10/helmfile_1.0.0-rc.10_linux_amd64.tar.gz
+curl -Lo helmfile.tar.gz https://github.com/helmfile/helmfile/releases/download/v1.0.0-rc.10/helmfile_1.0.0-rc.11_linux_amd64.tar.gz
 tar -xzf helmfile.tar.gz
 chmod +x helmfile
 sudo mv helmfile /usr/local/bin/

@@ -1,0 +1,57 @@
+repositories:
+  - name: kafka-repo
+    url: https://helm-charts.itboon.top/kafka
+  - name: bitnami
+    url: registry-1.docker.io/bitnamicharts
+    oci: true
+
+# Добавляем raw-манифесты
+#kustomizeBinary: kustomize
+#kustomizations: ## не работает так.
+#  - path: .
+#    resources:
+#      - pvc.yaml
+#      - storageClass.yaml
+
+hooks:
+  # Применяем манифесты перед установкой релиза
+  - events: ["presync"]
+    showlogs: true
+    command: "kubectl"
+    args: ["apply", "-f", "pvc.yaml"]
+  - events: ["presync"]
+    showlogs: true
+    command: "kubectl"
+    args: ["apply", "-f", "storageClass.yaml"]
+
+releases:
+  - name: prom
+    namespace: monitoring  # Укажите namespace, куда будет установлен Prometheus
+    createNamespace: true
+    chart: oci://registry-1.docker.io/bitnamicharts/kube-prometheus
+    version: "11.0.2"  # Укажите версию chart (например, 8.0.0) https://github.com/bitnami/charts/blob/main/bitnami/kube-prometheus/Chart.yaml
+    values:
+      - prometheus-values.yaml
+
+  - name: otus
+    namespace: homework
+    chart: ./otus
+    createNamespace: true
+
+  #- name: kafka-prod
+  #  namespace: prod
+  #  createNamespace: true
+  #  chart: kafka-repo/kafka
+  #  version: 13.3.0
+  #  values:
+  #    - kafka-prod-values.yaml
+
+  #- name: kafka-dev
+  #  namespace: dev
+  #  createNamespace: true
+  #  chart: kafka-repo/kafka
+  #  version: 18.0.1
+  #  values:
+  #    - kafka-dev-values.yaml
+  
+ # Укажите путь к файлу с кастомными значениями (опционально)  
