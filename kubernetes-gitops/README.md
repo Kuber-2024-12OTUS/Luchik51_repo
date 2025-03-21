@@ -27,6 +27,7 @@ admin
 jGAe1pPRmE7CB5vf
 
 kubectl port-forward -n argocd service/argocd-server 8080:80
+https://localhost:8080/applications
 
 ## Taint и Label
 ```
