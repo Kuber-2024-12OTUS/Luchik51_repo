@@ -18,6 +18,8 @@ helm upgrade --install argocd argo/argo-cd \
   --set global.tolerations[0].operator=Equal \
   --set global.tolerations[0].value=infra \
   --set global.tolerations[0].effect=NoSchedule
+
+helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace --set global.nodeSelector.node-role=infra --set global.tolerations[0].key=node-role --set global.tolerations[0].operator=Equal --set global.tolerations[0].value=infra --set global.tolerations[0].effect=NoSchedule
 ```
 
 
@@ -35,6 +37,11 @@ kubectl taint nodes <node-name> node-role=infra:NoSchedule
 
 kubectl get nodes --show-labels
 kubectl label node <node-name> node-role=infra
+
+В моём случае:
+kubectl label node cl177pfvrmolklovlenm-ixuv node-role=infra
+kubectl taint nodes cl177pfvrmolklovlenm-ixuv node-role=infra:NoSchedule
+kubectl label nodes cl1mnlucleef3vunqouc-yhof web-server=nginx
 ```
 
 grafana 
