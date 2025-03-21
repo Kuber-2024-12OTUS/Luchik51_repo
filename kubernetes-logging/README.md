@@ -22,8 +22,8 @@ https://console.yandex.cloud/folders/b1g44mi3b1l9u3sq8k2o/marketplace/products/f
 # Вариант 3
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
-helm upgrade --install loki grafana/loki-stack --namespace logging --create-namespace
-helm upgrade --install grafana grafana/grafana --namespace logging --create-namespace
+helm upgrade --install loki grafana/loki-stack -f loki-stack-values.yaml --namespace logging --create-namespace
+helm upgrade --install grafana grafana/grafana -f loki-stack-values.yaml --namespace logging --create-namespace
 
 # Узнаём пароль Grafana
 ## В Linux
@@ -46,6 +46,14 @@ kubectl get node -o wide --show-labels
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 ## Удаление
 kubectl taint nodes <node-name> node-role=infra:NoSchedule-
+```
+
+Так можно values посмотреть:
+```
+helm show values oci://cr.yandex/yc-marketplace/yandex-cloud/grafana/loki/chart/loki > yandex-loki-values.yaml
+helm show values grafana/loki > loki-values.yaml
+helm show values grafana/promtail > promtail-values.yaml
+helm show values grafana/grafana > grafana-values.yaml
 ```
 
 grafana 
