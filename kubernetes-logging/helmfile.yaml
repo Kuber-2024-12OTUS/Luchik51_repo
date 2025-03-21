@@ -1,0 +1,20 @@
+repositories:
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+
+releases:
+  - name: loki-stack
+    namespace: logging
+    createNamespace: true
+    chart: grafana/loki-stack
+    version: 2.10.2
+    values:
+      - loki-stack-values.yaml
+
+  #- name: loki
+  #  namespace: logging2  # Укажите namespace, куда будет установлен Prometheus
+  #  createNamespace: true
+  #  chart: oci://cr.yandex/yc-marketplace/yandex-cloud/grafana/loki/chart/loki
+  #  version: "1.2.0-7"  # Укажите версию chart (например, 8.0.0) https://yandex.cloud/ru/marketplace/products/yc/loki
+  #  values:
+  #    - yandex-loki-values.yaml
