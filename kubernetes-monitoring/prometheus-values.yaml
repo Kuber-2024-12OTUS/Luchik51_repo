@@ -1,0 +1,70 @@
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostname: monitoring.otus
+    path: /
+    pathType: Prefix
+    ## Второй вариант (extraRules) как можно ingress настроить
+    #extraRules:
+    #- host: monitoring.otus
+    #  http:
+    #    paths:  # Замените http.path на http.paths
+    #    - path: /
+    #      pathType: Prefix
+    #      backend:
+    #        service:
+    #          name: prom-svc
+    #          port:
+    #            name: http
+    #resources:
+    #  requests:
+    #    cpu: 100m
+#       memory: 64Mi
+    #  limits:
+    #    cpu: 200m
+#       memory: 1024Mi
+#operator: 
+#blackbox-exporter:
+#  resources:
+#    requests:
+#      cpu: 100m
+#      memory: 64Mi
+#    limits:
+#      cpu: 200m
+#      memory: 256Mi
+#prometheus-operator:
+#  resources:
+#    requests:
+#      cpu: 100m
+#      memory: 64Mi
+#    limits:
+#      cpu: 200m
+#      memory: 256Mi
+#resourcesPreset: "nano" ## Мтапндартное resourcesPreset: "nano"
+resources:
+  #requests:
+  #  cpu: 100m
+  #  memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 512Mi
+#serviceMonitor:
+#  enabled: true
+#  ## Что бы это работало, надо скачать helm и добавить файл (шаблон) - https://github.com/helm/charts/blob/9143206f0af35b7010c05b836a0d86aa68f002fa/stable/prometheus-operator/templates/prometheus/servicemonitors.yaml
+#   additionalServiceMonitors:
+#    - name: nginx-servicemonitor
+#      #namespace: monitoring
+#      labels:
+#        release: prometheus
+#      selector:
+#        matchLabels:
+#          release: prometheus
+#          app: web
+#      endpoints:
+#        - port: metrics
+#          interval: 30s
+#          path: /metrics
+#      namespaceSelector:
+#        matchNames:
+#          - homework
