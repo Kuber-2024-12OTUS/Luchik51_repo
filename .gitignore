@@ -9,3 +9,4 @@
 #*.cer
 .trunk
 .vscode
+.env
