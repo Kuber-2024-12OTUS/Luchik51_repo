@@ -21,6 +21,8 @@ helm upgrade --install argocd argo/argo-cd \
 
 helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace --set global.nodeSelector.node-role=infra --set global.tolerations[0].key=node-role --set global.tolerations[0].operator=Equal --set global.tolerations[0].value=infra --set global.tolerations[0].effect=NoSchedule
 ```
+**label web-server=nginx**  
+kubectl label nodes cl177pfvrmolklovlenm-ijeg web-server=nginx
 
 
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
@@ -28,8 +30,8 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 admin
 jGAe1pPRmE7CB5vf
 
-kubectl port-forward -n argocd service/argocd-server 8080:80
-https://localhost:8080/applications
+kubectl port-forward -n argocd service/argocd-server 8090:80
+https://localhost:8090/applications
 
 ## Taint и Label
 ```

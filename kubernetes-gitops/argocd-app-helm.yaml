@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-templating
+  namespace: argocd
+spec:
+  project: otus
+  source:
+    #chart: kubernetes-templating
+    repoURL: https://github.com/Kuber-2024-12OTUS/Luchik51_repo.git
+    targetRevision: main ## HEAD - если хотим использовать последний комит в главную ветку
+    path: kubernetes-templating/otus
+    helm:
+      releaseName: otus-templating
+      valuesObject:
+        deployment:
+          replicas: 1
+        namespace: homework-templating
+      parameters:
+      - name: resources.limits.memory
+        value: ""
+      - name: resources.requests.memory
+        value: ""
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: homework-templating
+      
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

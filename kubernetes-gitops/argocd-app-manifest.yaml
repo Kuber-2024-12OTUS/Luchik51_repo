@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: kubernetes-networks
-  namespace: argo
+  namespace: argocd
 spec:
   # Куда
   destination:
@@ -17,7 +17,7 @@ spec:
   source:
     path: kubernetes-networks
     repoURL: https://github.com/Kuber-2024-12OTUS/Luchik51_repo.git
-    targetRevision: HEAD
+    targetRevision: main ## HEAD - если хотим использовать последний комит в главную ветку
 
 operation:
   sync:
