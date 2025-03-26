@@ -8,23 +8,24 @@ spec:
   source:
     #chart: kubernetes-templating
     repoURL: https://github.com/Kuber-2024-12OTUS/Luchik51_repo.git
-    targetRevision: main ## HEAD - если хотим использовать последний комит в главную ветку
+    targetRevision: kubernetes-templating ## main или HEAD  - если хотим использовать последний комит в главную ветку
     path: kubernetes-templating/otus
     helm:
-      releaseName: otus-templating
+      namespace: homework-templating        
+      #releaseName: otus-templating
       valuesObject:
-        deployment:
-          replicas: 1
-        namespace: homework-templating
-      parameters:
-      - name: resources.limits.memory
-        value: ""
-      - name: resources.requests.memory
-        value: ""
+        replicaCount: 3
+      #  deployment:
+      #    replicas: 3
+      #  namespace: homework-templating
+      #parameters:
+      #- name: resources.limits.memory
+      #  value: ""
+      #- name: resources.requests.memory
+      #  value: ""
   destination:
     server: "https://kubernetes.default.svc"
     namespace: homework-templating
-      
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
