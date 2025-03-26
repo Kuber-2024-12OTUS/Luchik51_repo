@@ -43,16 +43,16 @@ kubectl taint nodes cl177pfvrmolklovlenm-ixuv node-role=infra:NoSchedule
 kubectl label nodes cl1mnlucleef3vunqouc-yhof web-server=nginx
 ```
 
-argocd
+**Argocd**
 ![argocd](img/argocd.png) 
 
 
-kubectl get all -n homework
-kubectl get all -n homework-templating
+**kubectl get all -n homework**
+**kubectl get all -n homework-templating**
 ![kubectl-get-all](img/kubectl-get-all.png) 
 
 
-homework-network
+**homework-network**
 ![homework-network](img/homework-network.png) 
 
 
