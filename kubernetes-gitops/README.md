@@ -6,11 +6,14 @@
 3) Создать приложение, описывающее установку из Helm-чарта, хранящегося в Git-репозитории  
 
 **Что сделано:**  
-С помощь Helmfile в кластер устанавливаеться ArgoCD.  
-С помощью манифестов создаётся новый проект с ограничениями на создание namespace и добавления источников для проектов.  
-С помощью манифестов создаются Application для ArgoCD. Один использует просто манифесты, второй helm из git-репозитория.
-Столкнулся с проблемой: "Multi-Attach error for volume "<volume-name>" Volume is already exclusively attached to one node and can't be attached to another" при 3-х репликах. 2 pod запустились, а один никак не сталтовал и такую ошибку выдавал.  
-Пришлось установить в кластер "Container Storage Interface для S3" и запускать pvc.yaml
+<ul>
+<li>С помощь Helmfile в кластер устанавливаеться ArgoCD.  </li>
+<li>С помощью манифестов создаётся новый проект с ограничениями на создание namespace и добавления источников для проектов.  </li>
+<li>С помощью манифестов создаются Application для ArgoCD. Один использует просто манифесты, второй helm из git-репозитория.  </li>
+<li>Столкнулся с проблемой: "Multi-Attach error for volume "<volume-name>" Volume is already exclusively attached to one node and can't be attached to another" при 3-х репликах. 2 pod запустились, а один никак не сталтовал и такую ошибку выдавал.  
+Пришлось установить в кластер "Container Storage Interface для S3" и запускать pvc.yaml  </li>
+</ul>
+
 **Для запуска:**
 ```
 helmfile sync
