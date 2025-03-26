@@ -60,10 +60,10 @@ spec:
             preStop:
               exec:
                 command: ["/bin/sh","-c","rm /homework/index.html"]
-          {{- if .Values.probes.livenessProbeenabled }}
-          livenessProbe:
-            {{- toYaml .Values.probes.livenessProbe | nindent 10 }}
-          {{- end }}
+          #{{- if .Values.probes.livenessProbeenabled }}
+          #livenessProbe:
+          #  {{- toYaml .Values.probes.livenessProbe | nindent 10 }}
+          #{{- end }}
           #readinessProbe:
           #  {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
