@@ -20,6 +20,7 @@ kubectl apply -f argocd-app-helm.yaml
 kubectl apply -f pvc.yaml
 ```
 **label web-server=nginx**  
+Мое приложение требует, что бы нода имела метку "web-server=nginx". Поэтому помечаем ноду:
 ```
 kubectl get nodes --show-labels
 kubectl label nodes cl177pfvrmolklovlenm-ijeg web-server=nginx
