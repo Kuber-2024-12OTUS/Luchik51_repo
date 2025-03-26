@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: otus
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: "Otus homework project"
+  # откуда
+  sourceRepos:
+  - https://github.com/Kuber-2024-12OTUS/*
+  #- '*'  ## любые репозитории
+  
+  # разрешения
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace
+  - group: 'rbac.authorization.k8s.io'
+    kind: ClusterRole
+  - group: 'rbac.authorization.k8s.io'
+    kind: ClusterRoleBinding
+  
+  # куда
+  destinations:
+  - namespace: homework
+    server: https://kubernetes.default.svc
+    name: in-cluster
+  - namespace: homework-templating
+    server: https://kubernetes.default.svc
+    name: in-cluster
+  orphanedResources:
+    warn: false
+  #  jwtTokens:
+  #  - iat: 1535390316
+
+  #syncWindows:
+  #- kind: allow
+  #  schedule: '* * * * *'
+
+  #permitOnlyProjectScopedClusters: false
+
+  sourceNamespaces:
+  - "argocd"
