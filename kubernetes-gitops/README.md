@@ -33,9 +33,7 @@ kubectl port-forward -n argocd service/argocd-server 8090:80
 https://localhost:8090/applications
 
 ## Taint и Label
-```
 kubectl taint nodes <node-name> node-role=infra:NoSchedule
-
 kubectl get nodes --show-labels
 kubectl label node <node-name> node-role=infra
 
