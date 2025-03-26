@@ -11,13 +11,13 @@ spec:
     targetRevision: kubernetes-templating ## main или HEAD  - если хотим использовать последний комит в главную ветку
     path: kubernetes-templating/otus
     helm:
-      namespace: homework-templating        
+      #namespace: homework-templating        
       #releaseName: otus-templating
       valuesObject:
         replicaCount: 3
-      #  deployment:
-      #    replicas: 3
-      #  namespace: homework-templating
+        deployment:
+          replicas: 3
+        namespace: homework-templating
       #parameters:
       #- name: resources.limits.memory
       #  value: ""
