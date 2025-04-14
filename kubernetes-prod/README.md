@@ -126,9 +126,9 @@ rm $HOME/.kube/config
   type: git
 ```
 Вывод консоли Ansible:  
-**kubeadm-1.32**
-![kubeadm-1.32](img/kubeadm-1.32.png) 
+**kubespray-ansible**
+![kubespray-ansible](img/kubespray-ansible.png) 
 
 Вывод kubectl:  
-**kubeadm-1.32**
-![kubeadm-1.32](img/kubeadm-1.32.png)
+**kubespray-kubectl**
+![kubespray-kubectl](img/kubespray-kubectl.png)
