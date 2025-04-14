@@ -122,8 +122,8 @@ rm $HOME/.kube/config
 ## Установка Kubernetes с помощью Kubespray
 Предварительно закидываем на виртуальные машины ssh ключ, что бы без паролей подключаться. И запускаем плэйбук. Использовалась коллекция   
 ```
-- name: https://github.com/kubernetes-sigs/kubespray
-  type: git
+ansible-galaxy install -r requirements.yml
+ansible-playbook -i inventory.ini --become --become-user=administrator kubespray.cluster.yml
 ```
 Вывод консоли Ansible:  
 **kubespray-ansible**

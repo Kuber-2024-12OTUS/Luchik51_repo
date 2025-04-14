@@ -1,0 +1,5 @@
+---
+collections:
+- name: https://github.com/kubernetes-sigs/kubespray
+  type: git
+  version: release-2.27 #master # use the appropriate tag or branch for the version you need
