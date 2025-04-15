@@ -1,0 +1,7 @@
+﻿server:
+  enabled: true
+  replicas: 3
+persistence:
+  enabled: true
+  storageClass: "local-path"
+  size: 1Gi
