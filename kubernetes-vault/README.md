@@ -18,10 +18,10 @@
 
 
 **HashiCorp Consul** — это service mesh и сервис обнаружения (service discovery) для распределённых систем. В Kubernetes Consul обеспечивает:
+* Key-Value Store (распределённое хранилище конфигов).
 * Service Discovery (автоматическое обнаружение сервисов через DNS или HTTP API).
 * Service Mesh (mTLS, трафик-контроль через sidecar-прокси Envoy).
-* Health Checking (мониторинг состояния нод и сервисов).
-* Key-Value Store (распределённое хранилище конфигов).
+* Health Checking (мониторинг состояния нод и сервисов).  
 [Git Consul](https://github.com/hashicorp/consul-k8s)  
 
 [Helm Consul](https://github.com/hashicorp/consul-k8s/tree/main/charts/consul)  
@@ -40,22 +40,35 @@
 helm pull oci://registry-1.docker.io/bitnamicharts/vault
 helm upgrade --install consul oci://registry-1.docker.io/bitnamicharts/consul -f consul-values.yaml --namespace consul --create-namespace
 helm upgrade --install vault oci://registry-1.docker.io/bitnamicharts/vault -f vault-values.yaml --namespace vault --create-namespace
+helm upgrade --install external-secrets external-secrets/external-secrets -n vault --create-namespace 
 
 kubectl get pods --namespace "vault" -l app.kubernetes.io/instance=vault
 
 kubectl exec -it vault-server-0 -n vault -- vault operator init
-Unseal Key 1: HbMwZP0ZxfUIX10jSbzR0T64z8116SYpkbePWvd8oG4q
-Unseal Key 2: 9SQ0XvuVAp7nptQ5BBLla1DP/gZvzM481XL8YjjjgWnw
-Unseal Key 3: S6gQrxPaDZu/uHT8O4/lS6Vzg57HA+0h6cL3S1VNseDJ
-Unseal Key 4: n02jE80G66XkXyS5WJ6zXlvxJUCTt1NQLnTaW5f/9L5E
-Unseal Key 5: zEuq5EZ2UfQ7jIrGK1z2+AivzJLq+rJseNG4NYcj+7pR
+Unseal Key 1: 3LeGVodYk24SwjK3dHKtEDlsadGhH/Sljm792ed18w2m
+Unseal Key 2: +ni2YPq8CQn54ilAO3nUjiUqOyhGw+kgK0lbfXUpzrjZ
+Unseal Key 3: HNsohgdTrA+meocQcKO8hjbXp1tE1V9KH3H+EchLcjiZ
+Unseal Key 4: jADsXfM8Iq2tnS9IvPFYHGdpOV4xgTIHcohRt1XAMQDV
+Unseal Key 5: CvztsgJyASyz0nyHFl8o6RCArUnvlclj8sah2VMlcfEu
 
-Initial Root Token: hvs.IjMblG4eptzcSwYRtxEUEQpM
+Initial Root Token: hvs.RsI9sUkfZrZmTf6vrWgNQ5OF
 
 Распечатываем хранилище 
-kubectl exec -it vault-server-0 -n vault -- vault operator unseal HbMwZP0ZxfUIX10jSbzR0T64z8116SYpkbePWvd8oG4q &&\
-kubectl exec -it vault-server-0 -n vault -- vault operator unseal 9SQ0XvuVAp7nptQ5BBLla1DP/gZvzM481XL8YjjjgWnw &&\
-kubectl exec -it vault-server-0 -n vault -- vault operator unseal zEuq5EZ2UfQ7jIrGK1z2+AivzJLq+rJseNG4NYcj+7pR
+kubectl exec -it vault-server-0 -n vault -- vault operator unseal 3LeGVodYk24SwjK3dHKtEDlsadGhH/Sljm792ed18w2m &&\
+kubectl exec -it vault-server-0 -n vault -- vault operator unseal +ni2YPq8CQn54ilAO3nUjiUqOyhGw+kgK0lbfXUpzrjZ &&\
+kubectl exec -it vault-server-0 -n vault -- vault operator unseal jADsXfM8Iq2tnS9IvPFYHGdpOV4xgTIHcohRt1XAMQDV &&\
+kubectl exec -it vault-server-1 -n vault -- vault operator unseal 3LeGVodYk24SwjK3dHKtEDlsadGhH/Sljm792ed18w2m &&\
+kubectl exec -it vault-server-1 -n vault -- vault operator unseal +ni2YPq8CQn54ilAO3nUjiUqOyhGw+kgK0lbfXUpzrjZ &&\
+kubectl exec -it vault-server-1 -n vault -- vault operator unseal jADsXfM8Iq2tnS9IvPFYHGdpOV4xgTIHcohRt1XAMQDV &&\
+kubectl exec -it vault-server-2 -n vault -- vault operator unseal 3LeGVodYk24SwjK3dHKtEDlsadGhH/Sljm792ed18w2m &&\
+kubectl exec -it vault-server-2 -n vault -- vault operator unseal +ni2YPq8CQn54ilAO3nUjiUqOyhGw+kgK0lbfXUpzrjZ &&\
+kubectl exec -it vault-server-2 -n vault -- vault operator unseal jADsXfM8Iq2tnS9IvPFYHGdpOV4xgTIHcohRt1XAMQDV
+kubectl exec -it vault-server-2 -n vault -- vault operator raft list-peers
+http://10.2.80.26:8200
+
+
+kubectl port-forward -n vault service/vault-server 30002:8200
+kubectl port-forward -n consul service/consul-ui 30002:80
 
 **img**
 ![img](img/img.png)

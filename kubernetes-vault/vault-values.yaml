@@ -2,6 +2,7 @@ server:
   enabled: true
   replicaCount: 3
   config: |
+    disable_mlock = true
     ui = true
     listener "tcp" {
       tls_disable = 1
