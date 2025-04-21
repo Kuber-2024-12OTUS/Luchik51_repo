@@ -32,6 +32,15 @@ kubectl итог
 PVC  
 ![pvc](img/pvc.png)  
 
+А так в Powershell можно закодировать секреты:  
+```
+# Кодирование ID Key
+[Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("YCAJ...MW"))
+
+# Кодирование Secret Key
+[Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("YCO...vyc"))
+```
+
 **Вариант 2 - автоматизированный**
 С помощью yandex маркета можно установить CSI класс, который создаст драйвер + StorageClass + Secret.
 
