@@ -1,46 +1,13 @@
-# Statically provisioned PVC:
-# An existing bucket or path inside bucket manually created
-# by the administrator beforehand will be bound to the PVC,
-# and it won't be removed when you remove the PV
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: homework-s3
-spec:
-  storageClassName: csi-s3-2
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteMany
-  claimRef:
-    namespace: default
-    name: csi-s3-manual-pvc
-  csi:
-    driver: ru.yandex.s3.csi
-    controllerPublishSecretRef:
-      name: csi-s3-secret
-      namespace: kube-system
-    nodePublishSecretRef:
-      name: csi-s3-secret
-      namespace: kube-system
-    nodeStageSecretRef:
-      name: csi-s3-secret
-      namespace: kube-system
-    volumeAttributes:
-      capacity: 10Gi
-      mounter: geesefs
-      options: --memory-limit 1000 --dir-mode 0777 --file-mode 0666
-    volumeHandle: homework-s3/path
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: my-sci2
+  name: my-sci3
   namespace: kube-system
 spec:
-  storageClassName: csi-s3-2
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
+  #volumeName: homework-s3
+  storageClassName: "csi-s3-2"

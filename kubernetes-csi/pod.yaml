@@ -28,7 +28,7 @@ spec:
         #  memory: "64Mi"
         #  cpu: "250m"
   volumes:
-  - name: data-storage
-    persistentVolumeClaim:
-      claimName: my-sci2  # Замените на имя вашего PVC
-  restartPolicy: Never
+    - name: data-storage
+      persistentVolumeClaim:
+        claimName: my-sci3
+        readOnly: false
