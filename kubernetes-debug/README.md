@@ -41,6 +41,7 @@ strace -p 1
 
 Strace пока не победил, нашел тут информацию.
 https://github.com/otus-kuber-2019-06/SOMikhaylov_platform/blob/master/docs/kubernetes-debug.md
+https://medium.com/@geekidea_81313/running-perf-in-docker-kubernetes-7eb878afcd42
 
 helmfile kafka 
 ![helmfile kafka](img/helmfile_kafka.png) 
