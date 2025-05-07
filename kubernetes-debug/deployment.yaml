@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homework
+  #labels: - не дало возможности запустить strace
+  #  pod-security.kubernetes.io/enforce: privileged
+    #pod-security.kubernetes.io/enforce-version: v1.31 - не использую
+  #  pod-security.kubernetes.io/audit: privileged
+    #pod-security.kubernetes.io/audit-version: v1.31 - не использую
+  #  pod-security.kubernetes.io/warn: privileged #restricted #baseline
+    #pod-security.kubernetes.io/warn-version: v1.31 - не использую
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,7 +18,7 @@ metadata:
   labels:
     app: web
 spec:
-  #securityContext:
+  #securityContext: - не дало возможности запустить strace
   #  runAsUser: 0
   #  runAsGroup: 0
   #  fsGroup: 101
@@ -23,9 +35,13 @@ spec:
       containers:
       - name: nginx
         image: kyos0109/nginx-distroless
-        securityContext:
-          seccompProfile:
-            type: Unconfined
+        #securityContext: - не дало возможности запустить strace
+        #  privileged: true
+        #  capabilities:
+        #    add: ["SYS_PTRACE", "SYS_ADMIN"]
+        #  allowPrivilegeEscalation: true
+        #  seccompProfile:
+        #    type: Unconfined
         ports:
         - containerPort: 80
         volumeMounts:
