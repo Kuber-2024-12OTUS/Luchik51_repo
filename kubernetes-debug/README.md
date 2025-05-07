@@ -67,8 +67,8 @@ apt update && apt install strace -y && strace -p 5
 Пример strace  
 ![strace](img/strace.png) 
 
-Литература:
-Strace пока не победил, нашел тут информацию (но, не помогла).
-https://medium.com/@geekidea_81313/running-perf-in-docker-kubernetes-7eb878afcd42
-Информация про привилигированные режимы.
-https://www.eksworkshop.com/docs/security/pod-security-standards/
+*Литература:*  
+Strace пока не победил, нашел тут информацию (но, не помогла).  
+https://medium.com/@geekidea_81313/running-perf-in-docker-kubernetes-7eb878afcd42  
+Информация про привилигированные режимы.  
+https://www.eksworkshop.com/docs/security/pod-security-standards/  
