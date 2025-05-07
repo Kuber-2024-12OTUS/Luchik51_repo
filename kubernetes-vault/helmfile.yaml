@@ -1,0 +1,26 @@
+repositories:
+  - name: external-secrets
+    url: https://charts.external-secrets.io
+
+releases:
+  - name: vault
+    namespace: vault
+    createNamespace: true
+    chart: oci://registry-1.docker.io/bitnamicharts/vault
+    version: 1.19.1 ## версии тут https://artifacthub.io/packages/helm/bitnami/vault
+    values:
+      - vault-values.yaml
+
+  - name: consul
+    namespace: consul
+    createNamespace: true
+    chart: oci://registry-1.docker.io/bitnamicharts/consul
+    version: 1.20.5 ## версии тут https://artifacthub.io/packages/helm/bitnami/consul
+    values:
+      - consul-values.yaml
+
+  - name: external-secrets
+    namespace: vault
+    createNamespace: true
+    chart: external-secrets
+    version: 0.16.1
