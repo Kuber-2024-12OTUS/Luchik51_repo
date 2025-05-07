@@ -42,8 +42,9 @@ helm upgrade --install consul oci://registry-1.docker.io/bitnamicharts/consul -f
 helm upgrade --install vault oci://registry-1.docker.io/bitnamicharts/vault -f vault-values.yaml --namespace vault --create-namespace
 helm upgrade --install external-secrets external-secrets/external-secrets -n vault --create-namespace 
 
+```
 kubectl get pods --namespace "vault" -l app.kubernetes.io/instance=vault
-
+# Инициализируем Vault
 kubectl exec -it vault-server-0 -n vault -- vault operator init
 Unseal Key 1: 3LeGVodYk24SwjK3dHKtEDlsadGhH/Sljm792ed18w2m
 Unseal Key 2: +ni2YPq8CQn54ilAO3nUjiUqOyhGw+kgK0lbfXUpzrjZ
@@ -52,8 +53,12 @@ Unseal Key 4: jADsXfM8Iq2tnS9IvPFYHGdpOV4xgTIHcohRt1XAMQDV
 Unseal Key 5: CvztsgJyASyz0nyHFl8o6RCArUnvlclj8sah2VMlcfEu
 
 Initial Root Token: hvs.RsI9sUkfZrZmTf6vrWgNQ5OF
+```
+**Инициализация Vault**
+![vault init](img/init.png)
 
 Распечатываем хранилище 
+```
 kubectl exec -it vault-server-0 -n vault -- vault operator unseal 3LeGVodYk24SwjK3dHKtEDlsadGhH/Sljm792ed18w2m &&\
 kubectl exec -it vault-server-0 -n vault -- vault operator unseal +ni2YPq8CQn54ilAO3nUjiUqOyhGw+kgK0lbfXUpzrjZ &&\
 kubectl exec -it vault-server-0 -n vault -- vault operator unseal jADsXfM8Iq2tnS9IvPFYHGdpOV4xgTIHcohRt1XAMQDV &&\
@@ -66,9 +71,11 @@ kubectl exec -it vault-server-2 -n vault -- vault operator unseal jADsXfM8Iq2tnS
 kubectl exec -it vault-server-2 -n vault -- vault operator raft list-peers
 http://10.2.80.26:8200
 
-
 kubectl port-forward -n vault service/vault-server 30002:8200
 kubectl port-forward -n consul service/consul-ui 30002:80
+```
+**Доступ к Web Ui Vault**
+![vault-web](img/vault-web.png)
 
-**img**
-![img](img/img.png)
+**Распечатываем хранилище Vault**
+![unseal Vault](img/unseal.png)
